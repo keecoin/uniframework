@@ -18,6 +18,11 @@ public class LoginAction extends BaseAction{
 		}
 		return INPUT;
 	}
+	
+	public String addUser(){
+		User newUser = userManager.save(user);
+		return SUCCESS;
+	}
 
 	public User getUser() {
 		return user;

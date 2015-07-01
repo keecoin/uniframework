@@ -27,8 +27,9 @@ public class UserDao extends HibernateDaoSupport implements IUserDao{
 	
 	@Override
 	public User LoginUser(String userName,String password){
-		User user = (User) this.getHibernateTemplate().findByNamedParam( "from User where userName=:name and password=:pass", new String[]{"name","pass"}, new String[]{userName,password}).get(0);
-		return user;
+		List<?> list = this.getHibernateTemplate().findByNamedParam( "from User where userName=:name and password=:pass", new String[]{"name","pass"}, new String[]{userName,password});
+		if(list==null || list.isEmpty()) return null;
+		return (User) list.get(0);
 	}
 
 }
